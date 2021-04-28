@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/wandji20/weather-app#readme",
   "devDependencies": {
+    "css-loader": "^5.2.4",
+    "style-loader": "^2.0.0",
     "stylelint": "^13.13.0",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",

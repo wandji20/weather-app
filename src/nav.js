@@ -76,7 +76,7 @@ const displayWeatherInfo = (data) => {
 
 const getWeatherInfo = (location) => {
   location = location.toLowerCase();
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`)
     .then((response) => response.json())
     .then((data) => displayWeatherInfo(data))
     .catch((err) => {

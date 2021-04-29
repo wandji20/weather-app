@@ -5,3 +5,69 @@ body {
   width: 100%;
   height: 100vh;
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20vh;
+  background-color: #444;
+}
+
+form input,
+.temp-btn,
+.submit-btn {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 120%;
+}
+
+form input {
+  outline: none;
+}
+
+.submit-btn {
+  border-radius: 0 5px 5px 0;
+  margin-left: -6px;
+  background-color: #eb6e4b;
+}
+
+.temp-btn {
+  margin-right: 20px;
+}
+
+.sunny-bg {
+  background: linear-gradient(45deg, #00b8ff, #9be8ff);
+}
+
+.average-bg {
+  background: linear-gradient(180deg, #4a7bff, #00b8ff, #9be8ff);
+}
+
+.low-bg {
+  background: grey;
+}
+
+.main-section {
+  height: 50vh;
+  display: grid;
+  width: 70%;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  font-size: 140%;
+}
+
+.extra-section {
+  height: 30vh;
+  background: #444;
+}
+
+span {
+  margin-left: 10px;
+}
+
+li {
+  list-style: none;
+}

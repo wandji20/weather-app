@@ -18,16 +18,13 @@ nav {
 form input,
 .temp-btn,
 .submit-btn {
-  padding: 10px;
+  padding: 17px;
   border-radius: 5px;
   border: none;
 }
 
 form input {
   outline: none;
-}
-
-.temp-btn {
 }
 
 .submit-btn {
@@ -55,4 +52,7 @@ form input {
   height: 30vh;
   text-align: white;
   background: #444;
+}
+span {
+  margin-left: 10px;
 }

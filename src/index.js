@@ -1,4 +1,7 @@
 import './styles.css';
+import displayNav from "./nav";
+
+
 
 const apiKey = '17c75489c7d51e26cfe6254a64c6e232';
 
@@ -10,7 +13,6 @@ const getWeatherInfo = (location) => {
   .then(data => displayData(data))
   .catch(err => console.log(err))
 };
-getWeatherInfo('LImbe');
 
 
 const kelvinToCelsius = (kelvin)=>{
@@ -29,6 +31,11 @@ const fahrenheitToKelvin = (fahrenheit)=>{
   return 273.15 + (fahrenheit-32) * 5/9
 }
 
+const displayWeatherIcon = (icon)=>{
+  let img = document.querySelector('#content').appendChild(document.createElement('img'))
+  img.src = `http://openweathermap.org/img/wn/${icon}@2x.png`
+  img.setAttribute('class', 'img-fluid icon')
+}
 
 const displayData = (data) =>{
   let temperature = kelvinToCelsius(data.main.temp);
@@ -37,6 +44,13 @@ const displayData = (data) =>{
   // console.log(temperature, minTemp, maxTemp);
   let celsius = kelvinToCelsius(data.main.temp)
   let fahrenheit = kelvinToFahrenheit(data.main.temp)
-  console.log(data.main.temp, celsius, fahrenheit, fahrenheitToKelvin(fahrenheit), celsuisToKelvin(celsius))
-  console.log()
+  displayWeatherIcon(data.weather[0].icon)
 }
+
+
+const start = ()=>{
+  displayNav();
+  // getWeatherInfo('dubai');
+  
+}
+start()

@@ -80,7 +80,7 @@ const getWeatherInfo = (location) => {
     .then((response) => response.json())
     .then((data) => displayWeatherInfo(data))
     .catch((err) => {
-      alert(`Unknown location or\n Network Error`);
+      alert(`${err}\nUnknown location or\n Network Error`);
     });
 };
 

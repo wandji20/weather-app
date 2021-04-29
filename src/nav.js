@@ -16,11 +16,11 @@ const displayWeatherIcon = (icon, node) => {
 const displayWeatherInfo = (data) => {
   const body = document.querySelector('body');
   if (data.main.temp >= 303.15) {
-    body.classList.add('sunny-bg');
+    body.setAttribute('class', 'sunny-bg');
   } else if (data.main.temp >= 293.15) {
-    body.classList.add('average-bg');
+    body.setAttribute('class', 'average-bg');
   } else if (data.main.temp < 293.15) {
-    body.classList.add('low-bg');
+    body.setAttribute('class', 'low-bg');
   }
   const mainSection = document.querySelector('.main-section');
   mainSection.innerHTML = '';

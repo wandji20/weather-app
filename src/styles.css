@@ -46,7 +46,7 @@ form input {
 }
 
 .low-bg {
-  background: linear-gradient(grey);
+  background: grey;
 }
 
 .main-section {
@@ -55,16 +55,15 @@ form input {
   width: 70%;
   margin: 0 auto;
   grid-template-columns: 1fr 1fr;
-
   align-content: center;
   font-size: 140%;
 }
 
 .extra-section {
   height: 30vh;
-  text-align: white;
   background: #444;
 }
+
 span {
   margin-left: 10px;
 }

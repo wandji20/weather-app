@@ -17,6 +17,8 @@ A simple weather app, that is able to:
 - CSS
 - Webpack
 
+## [Live](https://awesome-davinci-796587.netlify.app/)
+
 ## Getting Started
 
 To set up a local copy of the project

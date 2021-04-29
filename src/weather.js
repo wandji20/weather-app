@@ -6,16 +6,14 @@ const kelvinToCelsius = (kelvin)=>{
   return kelvin - 273.15 //'°C'
 }
 
-const celsuisToKelvin = (celsuis)=>{
-  return celsuis + 273.15
+const celsiusToFahrenheit = (celsuis)=>{
+  return (celsuis *9/5) + 32
 }
 
-const kelvinToFahrenheit = (kelvin)=>{
-  return (kelvin - 273.15) * 9/5 + 32
+
+const fahrenheitToCelsius = (fahrenheit)=>{
+  return (fahrenheit-32) * 5/9
+
 }
 
-const fahrenheitToKelvin = (fahrenheit)=>{
-  return 273.15 + (fahrenheit-32) * 5/9
-}
-
-export { kelvinToCelsius, kelvinToFahrenheit, celsuisToKelvin, fahrenheitToKelvin }
+export { kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius }

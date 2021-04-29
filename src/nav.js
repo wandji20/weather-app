@@ -1,6 +1,6 @@
 import "../assets/logo.png";
 import {
-  kelvinToCelsius, kelvinToFahrenheit, celsuisToKelvin, fahrenheitToKelvin
+  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius
 } from './weather'
 
 const body =  document.querySelector('body')
@@ -11,11 +11,13 @@ const formSubmit  = document.querySelector('.submit-btn')
 
 const getWeatherInfo = (location) => {
   location = location.toLowerCase();
-  console.log(location);
   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`)
   .then(response => response.json())
   .then(data => displayWeatherInfo(data))
-  .catch(err => console.log(err))
+  .catch(err => {
+    // console.log(response.status)
+    alert(`err\n Network Error`)
+  })
 };
 
 
@@ -46,7 +48,20 @@ function displayNav(){
   const btnContainer = nav.appendChild(document.createElement('div'))
   const tempBtn = btnContainer.appendChild(document.createElement('button'))
   tempBtn.setAttribute('class', 'temp-btn')
-  tempBtn.textContent = 'F / C'
+  tempBtn.textContent = '°F / °C'
+
+  tempBtn.addEventListener('click',()=>{
+  let tempSpan = document.querySelector('.temp-span')
+  if (tempSpan.innerHTML.endsWith('°C')){
+    let temp = parseFloat(tempSpan.innerHTML.split(' ')[0])
+    temp = celsiusToFahrenheit(temp);
+    tempSpan.innerHTML = Math.round(temp) +' °F'
+  }else if(tempSpan.innerHTML.endsWith('°F')){
+    let temp = parseFloat(tempSpan.innerHTML.split(' ')[0])
+    temp = fahrenheitToCelsius(temp)
+    tempSpan.innerHTML = Math.round(temp) +' °C'
+  }
+})
 }
 
 const displayWeatherIcon = (icon, node)=>{
@@ -62,16 +77,16 @@ function contentStructure(){
   const extraSection =  content.appendChild(document.createElement('section'))
   extraSection.setAttribute('class', 'extra-section')
 }
-function selectedDetails(data){
-  let nonTarget = ['temp', 'feels_like']
-  let newData = Object.entries(data)
-  return  Object.entries(data).filter(
-    (item)=>!nonTarget.includes(item[0])
-    ) 
-  
-}
-  
+
 const displayWeatherInfo =(data)=>{
+  const body = document.querySelector('body')
+  if (data.main.temp >= 303.15){
+    body.classList.add('sunny-bg')
+  }else if (data.main.temp >= 293.15){
+    body.classList.add('average-bg')
+  }else if(data.main.temp < 293.15){
+    body.classList.add('low-bg')
+  }
   const mainSection = document.querySelector('.main-section');
   mainSection.innerHTML = '';
   const details = mainSection.appendChild(document.createElement('div'))
@@ -97,18 +112,18 @@ const displayWeatherInfo =(data)=>{
 
   let item3= list.appendChild(document.createElement('li'))
   let property3= item3.appendChild(document.createElement('span'))
-  property3.innerHTML = 'Min Temperature'
+  property3.innerHTML = 'Longitude: '
   property3.setAttribute('class', 'property')
   let property3Value = item3.appendChild(document.createElement('span'))
-  property3Value.innerHTML = Math.round(kelvinToCelsius(data.main.temp_min)) + ' °C'
+  property3Value.innerHTML = data.coord.lon
   property3Value.setAttribute('class', 'description-value')
 
   let item4= list.appendChild(document.createElement('li'))
   let property4= item4.appendChild(document.createElement('span'))
-  property4.innerHTML = 'Max Temperature'
+  property4.innerHTML = 'Latitude: '
   property4.setAttribute('class', 'property')
   let property4Value = item4.appendChild(document.createElement('span'))
-  property4Value.innerHTML = Math.round(kelvinToCelsius(data.main.temp_max)) + ' °C'
+  property4Value.innerHTML = data.coord.lat
   property4Value.setAttribute('class', 'description-value')
     
     
@@ -122,10 +137,12 @@ const displayWeatherInfo =(data)=>{
 
   let temperaturePara = temperature.appendChild(document.createElement('p'))
   displayWeatherIcon( data.weather[0].icon, temperaturePara)
-  temperaturePara.appendChild(document.createElement('span')).innerHTML = Math.round(kelvinToCelsius(data.main.temp)*10)/10 + ' °C'
-
+  let tempSpan = temperaturePara.appendChild(document.createElement('span'))
+  tempSpan.innerHTML = Math.round(kelvinToCelsius(data.main.temp)*10)/10 + ' °C'
+  tempSpan.classList.add('temp-span')
   
 }
+
 
 
 export {displayNav, contentStructure}

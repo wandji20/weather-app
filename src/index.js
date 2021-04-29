@@ -1,11 +1,9 @@
 import './styles.css';
-import {displayNav, contentStructure} from "./nav";
+import { displayNav, contentStructure } from './nav';
 // import displayMain from './main'
 
-
-
-const start = ()=>{
+const start = () => {
   displayNav();
-  contentStructure()
-}
-start()
+  contentStructure();
+};
+start();

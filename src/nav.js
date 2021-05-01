@@ -1,7 +1,7 @@
 import '../assets/logo.png';
 // eslint-disable-next-line import/no-cycle
 import {
-  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius, getUserCoord, getWeatherInfo,
+  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius, getWeatherInfo,
 } from './weather';
 
 const body = document.querySelector('body');
@@ -82,7 +82,6 @@ function displayNav() {
   const logo = nav.appendChild(document.createElement('img'));
   logo.src = '../assets/logo.png';
 
-  getUserCoord();
   const form = nav.appendChild(document.createElement('form'));
   const cityName = form.appendChild(document.createElement('input'));
   cityName.type = 'text';

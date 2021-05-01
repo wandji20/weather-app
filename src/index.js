@@ -1,5 +1,6 @@
 import './styles.css';
 import { displayNav, contentStructure } from './nav';
+import {getLocation} from './weather'
 // import displayMain from './main'
 
 const start = () => {
@@ -7,3 +8,5 @@ const start = () => {
   contentStructure();
 };
 start();
+// getLocation()
+

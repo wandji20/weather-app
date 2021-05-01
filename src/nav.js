@@ -1,11 +1,11 @@
 import '../assets/logo.png';
 import {
-  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius,
+  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius, getUserCoord, getWeatherInfo
 } from './weather';
 
 const body = document.querySelector('body');
 const content = document.querySelector('#content');
-const apiKey = '17c75489c7d51e26cfe6254a64c6e232';
+
 
 const displayWeatherIcon = (icon, node) => {
   const img = node.appendChild(document.createElement('img'));
@@ -74,22 +74,13 @@ const displayWeatherInfo = (data) => {
   tempSpan.classList.add('temp-span');
 };
 
-const getWeatherInfo = (location) => {
-  location = location.toLowerCase();
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`)
-    .then((response) => response.json())
-    .then((data) => displayWeatherInfo(data))
-    .catch((err) => {
-      alert(`${err}\nUnknown location or\n Network Error`);
-    });
-};
 
 function displayNav() {
   const nav = body.insertBefore(document.createElement('nav'), content);
   const logo = nav.appendChild(document.createElement('img'));
   logo.src = '../assets/logo.png';
 
-  getWeatherInfo('london');
+  getUserCoord()
   const form = nav.appendChild(document.createElement('form'));
   const cityName = form.appendChild(document.createElement('input'));
   cityName.type = 'text';
@@ -99,31 +90,31 @@ function displayNav() {
   formSubmit.type = 'submit';
   formSubmit.innerHTML = 'Search';
   formSubmit.setAttribute('class', 'submit-btn');
-  formSubmit.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (cityName.value !== '') {
-      getWeatherInfo(cityName.value);
-      cityName.value = '';
-    }
-  });
+  // formSubmit.addEventListener('click', (e) => {
+  //   e.preventDefault();
+  //   if (cityName.value !== '') {
+  //     getWeatherInfo(cityName.value);
+  //     cityName.value = '';
+  //   }
+  // });
 
   const btnContainer = nav.appendChild(document.createElement('div'));
   const tempBtn = btnContainer.appendChild(document.createElement('button'));
   tempBtn.setAttribute('class', 'temp-btn');
   tempBtn.textContent = '°F / °C';
 
-  tempBtn.addEventListener('click', () => {
-    const tempSpan = document.querySelector('.temp-span');
-    if (tempSpan.innerHTML.endsWith('°C')) {
-      let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
-      temp = celsiusToFahrenheit(temp);
-      tempSpan.innerHTML = `${Math.round(temp)} °F`;
-    } else if (tempSpan.innerHTML.endsWith('°F')) {
-      let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
-      temp = fahrenheitToCelsius(temp);
-      tempSpan.innerHTML = `${Math.round(temp)} °C`;
-    }
-  });
+  // tempBtn.addEventListener('click', () => {
+  //   const tempSpan = document.querySelector('.temp-span');
+  //   if (tempSpan.innerHTML.endsWith('°C')) {
+  //     let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
+  //     temp = celsiusToFahrenheit(temp);
+  //     tempSpan.innerHTML = `${Math.round(temp)} °F`;
+  //   } else if (tempSpan.innerHTML.endsWith('°F')) {
+  //     let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
+  //     temp = fahrenheitToCelsius(temp);
+  //     tempSpan.innerHTML = `${Math.round(temp)} °C`;
+  //   }
+  // });
 }
 
 function contentStructure() {
@@ -134,4 +125,4 @@ function contentStructure() {
   extraSection.setAttribute('class', 'extra-section');
 }
 
-export { displayNav, contentStructure };
+export { displayNav, contentStructure, displayWeatherInfo };

@@ -1,11 +1,11 @@
 import '../assets/logo.png';
+// eslint-disable-next-line import/no-cycle
 import {
-  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius, getUserCoord, getWeatherInfo
+  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius, getUserCoord, getWeatherInfo,
 } from './weather';
 
 const body = document.querySelector('body');
 const content = document.querySelector('#content');
-
 
 const displayWeatherIcon = (icon, node) => {
   const img = node.appendChild(document.createElement('img'));
@@ -73,17 +73,16 @@ const displayWeatherInfo = (data) => {
   tempSpan.innerHTML = `${Math.round(kelvinToCelsius(data.main.temp) * 10) / 10} °C`;
   tempSpan.classList.add('temp-span');
 
-  const extraSection = document.querySelector('.extra-section')
-  extraSection.innerHTML = ''
+  const extraSection = document.querySelector('.extra-section');
+  extraSection.innerHTML = '';
 };
-
 
 function displayNav() {
   const nav = body.insertBefore(document.createElement('nav'), content);
   const logo = nav.appendChild(document.createElement('img'));
   logo.src = '../assets/logo.png';
 
-  getUserCoord()
+  getUserCoord();
   const form = nav.appendChild(document.createElement('form'));
   const cityName = form.appendChild(document.createElement('input'));
   cityName.type = 'text';
@@ -128,11 +127,20 @@ function contentStructure() {
   extraSection.setAttribute('class', 'extra-section');
 }
 
-function displayAwaitText(){
+function displayAwaitText() {
   const extraSection = document.querySelector('.extra-section');
-  extraSection.innerHTML = ''
-  const para = extraSection.appendChild(document.createElement('p'))
-  para.innerHTML = 'Getting Weather Info'
+  extraSection.innerHTML = '';
+  const para = extraSection.appendChild(document.createElement('p'));
+  para.innerHTML = 'Getting Weather Info';
 }
 
-export { displayNav, contentStructure, displayWeatherInfo, displayAwaitText };
+function displayError(text) {
+  const extraSection = document.querySelector('.extra-section');
+  extraSection.innerHTML = '';
+  const para = extraSection.appendChild(document.createElement('p'));
+  para.innerHTML = text;
+}
+
+export {
+  displayNav, contentStructure, displayWeatherInfo, displayAwaitText, displayError,
+};

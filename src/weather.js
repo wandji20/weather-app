@@ -23,7 +23,7 @@ const getWeatherInfo = (location) => {
 function getUserWeatherInfo(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=17c75489c7d51e26cfe6254a64c6e232`)
+  fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=17c75489c7d51e26cfe6254a64c6e232`)
     .then((response) => response.json())
     .then((data) => getWeatherInfo(data[0].name))
     .catch((err) => err);

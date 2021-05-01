@@ -9,7 +9,7 @@ const content = document.querySelector('#content');
 
 const displayWeatherIcon = (icon, node) => {
   const img = node.appendChild(document.createElement('img'));
-  img.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  img.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
   img.setAttribute('class', 'img-fluid icon');
 };
 

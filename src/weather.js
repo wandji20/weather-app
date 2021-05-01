@@ -1,4 +1,4 @@
-import {displayWeatherInfo} from './nav'
+import {displayWeatherInfo, displayAwaitText} from './nav'
 const apiKey = '17c75489c7d51e26cfe6254a64c6e232';
 
 const kelvinToCelsius = (kelvin) => kelvin - 273.15;
@@ -9,13 +9,14 @@ const fahrenheitToCelsius = (fahrenheit) => (fahrenheit - 32) * (5 / 9);
 
 const getWeatherInfo = (location) => {
   location = location.toLowerCase();
-  console.log(location)
+  displayAwaitText()
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`)
     .then((response) => response.json())
     .then((data) => displayWeatherInfo(data))
     .catch((err) => {
       alert(`${err}\nUnknown location or\n Network Error`);
     });
+    
 };
 
 function getUserCoord() {

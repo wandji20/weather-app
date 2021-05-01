@@ -72,6 +72,9 @@ const displayWeatherInfo = (data) => {
   const tempSpan = temperaturePara.appendChild(document.createElement('span'));
   tempSpan.innerHTML = `${Math.round(kelvinToCelsius(data.main.temp) * 10) / 10} °C`;
   tempSpan.classList.add('temp-span');
+
+  const extraSection = document.querySelector('.extra-section')
+  extraSection.innerHTML = ''
 };
 
 
@@ -90,31 +93,31 @@ function displayNav() {
   formSubmit.type = 'submit';
   formSubmit.innerHTML = 'Search';
   formSubmit.setAttribute('class', 'submit-btn');
-  // formSubmit.addEventListener('click', (e) => {
-  //   e.preventDefault();
-  //   if (cityName.value !== '') {
-  //     getWeatherInfo(cityName.value);
-  //     cityName.value = '';
-  //   }
-  // });
+  formSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (cityName.value !== '') {
+      getWeatherInfo(cityName.value);
+      cityName.value = '';
+    }
+  });
 
   const btnContainer = nav.appendChild(document.createElement('div'));
   const tempBtn = btnContainer.appendChild(document.createElement('button'));
   tempBtn.setAttribute('class', 'temp-btn');
   tempBtn.textContent = '°F / °C';
 
-  // tempBtn.addEventListener('click', () => {
-  //   const tempSpan = document.querySelector('.temp-span');
-  //   if (tempSpan.innerHTML.endsWith('°C')) {
-  //     let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
-  //     temp = celsiusToFahrenheit(temp);
-  //     tempSpan.innerHTML = `${Math.round(temp)} °F`;
-  //   } else if (tempSpan.innerHTML.endsWith('°F')) {
-  //     let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
-  //     temp = fahrenheitToCelsius(temp);
-  //     tempSpan.innerHTML = `${Math.round(temp)} °C`;
-  //   }
-  // });
+  tempBtn.addEventListener('click', () => {
+    const tempSpan = document.querySelector('.temp-span');
+    if (tempSpan.innerHTML.endsWith('°C')) {
+      let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
+      temp = celsiusToFahrenheit(temp);
+      tempSpan.innerHTML = `${Math.round(temp)} °F`;
+    } else if (tempSpan.innerHTML.endsWith('°F')) {
+      let temp = parseFloat(tempSpan.innerHTML.split(' ')[0]);
+      temp = fahrenheitToCelsius(temp);
+      tempSpan.innerHTML = `${Math.round(temp)} °C`;
+    }
+  });
 }
 
 function contentStructure() {
@@ -125,4 +128,11 @@ function contentStructure() {
   extraSection.setAttribute('class', 'extra-section');
 }
 
-export { displayNav, contentStructure, displayWeatherInfo };
+function displayAwaitText(){
+  const extraSection = document.querySelector('.extra-section');
+  extraSection.innerHTML = ''
+  const para = extraSection.appendChild(document.createElement('p'))
+  para.innerHTML = 'Getting Weather Info'
+}
+
+export { displayNav, contentStructure, displayWeatherInfo, displayAwaitText };

@@ -1,9 +1,10 @@
 import './styles.css';
 import { displayNav, contentStructure } from './nav';
-// import displayMain from './main'
+import { getUserCoord } from './weather';
 
 const start = () => {
   displayNav();
   contentStructure();
 };
 start();
+getUserCoord();

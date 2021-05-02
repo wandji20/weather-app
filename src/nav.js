@@ -1,15 +1,15 @@
 import '../assets/logo.png';
+// eslint-disable-next-line import/no-cycle
 import {
-  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius,
+  kelvinToCelsius, celsiusToFahrenheit, fahrenheitToCelsius, getWeatherInfo,
 } from './weather';
 
 const body = document.querySelector('body');
 const content = document.querySelector('#content');
-const apiKey = '17c75489c7d51e26cfe6254a64c6e232';
 
 const displayWeatherIcon = (icon, node) => {
   const img = node.appendChild(document.createElement('img'));
-  img.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  img.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
   img.setAttribute('class', 'img-fluid icon');
 };
 
@@ -72,16 +72,9 @@ const displayWeatherInfo = (data) => {
   const tempSpan = temperaturePara.appendChild(document.createElement('span'));
   tempSpan.innerHTML = `${Math.round(kelvinToCelsius(data.main.temp) * 10) / 10} °C`;
   tempSpan.classList.add('temp-span');
-};
 
-const getWeatherInfo = (location) => {
-  location = location.toLowerCase();
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`)
-    .then((response) => response.json())
-    .then((data) => displayWeatherInfo(data))
-    .catch((err) => {
-      alert(`${err}\nUnknown location or\n Network Error`);
-    });
+  const extraSection = document.querySelector('.extra-section');
+  extraSection.innerHTML = '';
 };
 
 function displayNav() {
@@ -89,7 +82,6 @@ function displayNav() {
   const logo = nav.appendChild(document.createElement('img'));
   logo.src = '../assets/logo.png';
 
-  getWeatherInfo('london');
   const form = nav.appendChild(document.createElement('form'));
   const cityName = form.appendChild(document.createElement('input'));
   cityName.type = 'text';
@@ -134,4 +126,20 @@ function contentStructure() {
   extraSection.setAttribute('class', 'extra-section');
 }
 
-export { displayNav, contentStructure };
+function displayAwaitText() {
+  const extraSection = document.querySelector('.extra-section');
+  extraSection.innerHTML = '';
+  const para = extraSection.appendChild(document.createElement('p'));
+  para.innerHTML = 'Getting Weather Info';
+}
+
+function displayError(text) {
+  const extraSection = document.querySelector('.extra-section');
+  extraSection.innerHTML = '';
+  const para = extraSection.appendChild(document.createElement('p'));
+  para.innerHTML = text;
+}
+
+export {
+  displayNav, contentStructure, displayWeatherInfo, displayAwaitText, displayError,
+};

@@ -62,6 +62,13 @@ form input {
 .extra-section {
   height: 30vh;
   background: #444;
+  display: flex;
+  justify-content: center;
+}
+
+.extra-section p {
+  font-size: 150%;
+  color: white;
 }
 
 span {

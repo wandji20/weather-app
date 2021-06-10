@@ -79,6 +79,7 @@ const displayWeatherInfo = (data) => {
 
 function displayNav() {
   const nav = body.insertBefore(document.createElement('nav'), content);
+  nav.classList.add("navbar")
   const logo = nav.appendChild(document.createElement('img'));
   logo.src = '../assets/logo.png';
 

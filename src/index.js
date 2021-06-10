@@ -1,4 +1,4 @@
-import './styles.css';
+import './styles.scss';
 import { displayNav, contentStructure } from './nav';
 import { getUserCoord } from './weather';
 
